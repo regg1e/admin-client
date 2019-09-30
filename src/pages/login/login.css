@@ -1,0 +1,42 @@
+.login {
+  width: 100%;
+  height: 100%;
+  background-image: url('../../assets/images/login_bg.jpg');
+  background-size: 100% 100%;
+}
+.login .login-header {
+  height: 80px;
+  width: 100%;
+  background-color: rgba(20, 15, 23, 0.5);
+  line-height: 80px;
+}
+.login .login-header h1 {
+  font-size: 30px;
+  color: #fff;
+  margin-left: 100px;
+}
+.login .login-main {
+  width: 100%;
+  height: 100%;
+}
+.login .login-main .login-from {
+  width: 400px;
+  height: 300px;
+  border-radius: 5px;
+  margin: 70px auto;
+  background-color: #fff;
+  padding: 40px;
+}
+.login .login-main .login-from h2 {
+  font-size: 26px;
+  font-weight: 700;
+  color: #000;
+  text-align: center;
+  margin-bottom: 20px;
+}
+.login .login-main .login-from .ant-form-item-control {
+  line-height: 10px;
+}
+.login .login-main .login-from .login-form-button {
+  width: 100%;
+}
