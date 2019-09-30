@@ -7,13 +7,18 @@ class Login extends Component {
     this.state = {  }
   }
 
-  handleSubmit = () => {
-    console.log(1);
+  handleSubmit = (e) => {
+    e.preventDefault();
+    const from = this.props.form
+    const values = from.getFieldsValue()
+    console.log(values);
     
-    return
   }
 
   render() { 
+    const from  = this.props.form;
+    const { getFieldDecorator } = from;
+
     return ( 
       <div className="login">
         <header className="login-header">
@@ -24,20 +29,28 @@ class Login extends Component {
             <h2>用户登录</h2>
             <Form onSubmit={this.handleSubmit} className="login-form">
               <Form.Item>
+                {getFieldDecorator('username', {
+                  rules: [{ required: true, message: 'Please input your username!' }],
+                })(
                   <Input
                     prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                    placeholder="Username"
-                  />,
+                    placeholder="用户名"
+                  />
+                )}
               </Form.Item>
               <Form.Item>
+                {getFieldDecorator('password',{
+                  rules: [{ required: true, message: 'Please input your Password!' }]
+                })(
                   <Input
                     prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
                     type="password"
-                    placeholder="Password"
-                  />,
+                    placeholder="密码"
+                  />
+                )}
               </Form.Item>
               <Form.Item>
-                <Button type="primary"  className="login-form-button">
+                <Button type="primary" htmlType="submit" className="login-form-button">
                   登录
                 </Button>
               </Form.Item>
@@ -48,5 +61,8 @@ class Login extends Component {
      )
   }
 }
- 
-export default Login;
+
+// 将组件包装
+const WrappedNormalLoginForm = Form.create()(Login);
+
+export default WrappedNormalLoginForm;
