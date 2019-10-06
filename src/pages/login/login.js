@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './login.less'
-import { Form, Icon, Input, Button} from 'antd';
+import { message,Form, Icon, Input, Button} from 'antd';
+import {reqLogin} from '../../api/index'
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -9,9 +10,25 @@ class Login extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const from = this.props.form
-    const values = from.getFieldsValue()
-    console.log(values);
+    this.props.form.validateFields((err, values) => {
+      if (!err) {
+        // console.log('Received values of form: ', values);
+        reqLogin(values).then(res => {
+          console.log(res);
+          if(res.state == 0) {
+            message.success('登录成功')
+          } else {
+            message.error(res.msg)
+          }
+        }) 
+      } else {
+        console.log('输入有误');
+        
+      }
+    });
+    // const from = this.props.form
+    // const values = from.getFieldsValue()
+    // console.log(values);
     
   }
 
@@ -30,7 +47,11 @@ class Login extends Component {
             <Form onSubmit={this.handleSubmit} className="login-form">
               <Form.Item>
                 {getFieldDecorator('username', {
-                  rules: [{ required: true, message: 'Please input your username!' }],
+                  rules: [
+                  { required: true, message: '请输入用户名!' },
+                  { max: 12, message: '最长字段12!' },
+                  { min: 4, message: '最小字段4!' }
+                ]
                 })(
                   <Input
                     prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
@@ -40,7 +61,11 @@ class Login extends Component {
               </Form.Item>
               <Form.Item>
                 {getFieldDecorator('password',{
-                  rules: [{ required: true, message: 'Please input your Password!' }]
+                  rules: [
+                    { required: true, message: '请输入密码!' },
+                    { max: 12, message: '最长字段12!' },
+                    { min: 4, message: '最小字段4!' }
+                  ]
                 })(
                   <Input
                     prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
