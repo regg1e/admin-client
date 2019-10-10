@@ -10,17 +10,26 @@ class Login extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    this.props.form.validateFields((err, values) => {
+    this.props.form.validateFields(async (err, values) => {
       if (!err) {
         // console.log('Received values of form: ', values);
-        reqLogin(values).then(res => {
-          console.log(res);
-          if(res.state == 0) {
-            message.success('登录成功')
-          } else {
-            message.error(res.msg)
-          }
-        }) 
+        const res = await reqLogin(values)
+        console.log(res);
+        
+        if(res.status === 0) {
+          message.success('登录成功')
+          this.props.history.replace('/')
+        } else {
+          message.error(res.message)
+        }
+        // reqLogin(values).then(res => {
+        //   console.log(res);
+        //   if(res.state == 0) {
+        //     message.success('登录成功')
+        //   } else {
+        //     message.error(res.msg)
+        //   }
+        // }) 
       } else {
         console.log('输入有误');
         
