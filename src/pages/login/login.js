@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './login.less'
 import { message,Form, Icon, Input, Button} from 'antd';
 import {reqLogin} from '../../api/index'
+import  memoryUtil  from '../../utils/memoryUtil'
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -18,6 +19,8 @@ class Login extends Component {
         
         if(res.status === 0) {
           message.success('登录成功')
+          memoryUtil.user = res.data
+          localStorage.setItem('user',JSON.stringify(res.data))
           this.props.history.replace('/')
         } else {
           message.error(res.message)

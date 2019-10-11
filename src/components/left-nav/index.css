@@ -1,0 +1,20 @@
+.left-nav {
+  height: 100%;
+  background-color: #001529;
+  color: #fff;
+}
+.left-nav .left-nav-header {
+  height: 80px;
+  line-height: 80px;
+  text-align: center;
+  background-color: #052a4e;
+}
+.left-nav .left-nav-header .icon {
+  font-size: 40px;
+  margin-right: 10px;
+  vertical-align: middle;
+  margin-bottom: 10px;
+}
+.left-nav .left-nav-header span {
+  font-size: 20px;
+}
