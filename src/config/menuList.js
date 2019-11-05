@@ -50,7 +50,7 @@ const menuList = [
         title: '饼图',
         key: '/bar/par',
         icon:'tool'
-      }
+      },
     ]
   }
 ]
